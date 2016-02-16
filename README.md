@@ -21,10 +21,12 @@ OFXClient::search_institutions("Fidelity")
 
 ````Ruby
 fi = OFXClient::get_institution(449)
-puts fi.fid
-puts fi.name
-puts fi.org
-puts fi.url
+unless fi.nil?
+  puts fi.fid
+  puts fi.name
+  puts fi.org
+  puts fi.url
+end
 ```
 => 449
 
