@@ -13,7 +13,7 @@ RubyGem: [https://rubygems.org/gems/funds](https://rubygems.org/gems/funds)
 ### Query ofxhome.com API for FIDs
 
 ```Ruby
-vanguards = OFXClient::search_institutions("Fidelity")
+OFXClient::search_institutions("Fidelity")
 ```
 => {"Fidelity Investments"=>449, "Fidelity NetBenefits"=>558}
 
