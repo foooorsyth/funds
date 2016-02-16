@@ -4,6 +4,10 @@ An Open Financial Exchange client in Ruby
 
 # Installation
 
+`gem install nokogiri -v 1.6.7.2`
+
+`gem install httpclient -v 2.7.1`
+
 `gem install funds`
 
 RubyGem: [https://rubygems.org/gems/funds](https://rubygems.org/gems/funds)
