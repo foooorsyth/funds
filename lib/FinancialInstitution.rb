@@ -1,4 +1,5 @@
 class FinancialInstitution
+
     attr_accessor :fid
     attr_accessor :name
     attr_accessor :org
@@ -10,4 +11,5 @@ class FinancialInstitution
         @org = org;
         @url = url;
     end
+    
 end

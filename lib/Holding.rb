@@ -7,5 +7,5 @@ class Holding
         @symbol = symbol
         @shares = shares
     end
-
+    
 end
