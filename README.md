@@ -1,6 +1,6 @@
 # funds (alpha)
 
-An Open Financial Exchange client in Ruby
+An Open Financial Exchange (OFX) client in Ruby
 
 # Installation
 
@@ -12,14 +12,16 @@ RubyGem: [https://rubygems.org/gems/funds](https://rubygems.org/gems/funds)
 
 # Usage
 
-### Query ofxhome.com API for FIDs
+### Query ofxhome.com API for ofxhome.com institution IDs
 
 ```Ruby
 OFXClient::search_institutions("Fidelity")
 ```
 => {"Fidelity Investments"=>449, "Fidelity NetBenefits"=>558}
 
-### Retrieve FinancialInstitution by FID
+NOTE: ofxhome.com institution IDs are unique to the ofxhome.com database. These IDs are independent of the OFX FID tied to a given institution. You will use ofxhome.com institution IDs to retrieve an institution's FID.
+
+### Retrieve FinancialInstitution by institution ID
 
 ````Ruby
 fi = OFXClient::get_institution(449)
@@ -30,7 +32,7 @@ unless fi.nil?
   puts fi.url
 end
 ```
-=> 449  
+=> 7776  
 => Fidelity Investments  
 => fidelity.com  
 => https://ofx.fidelity.com/ftgw/OFX/clients/download
@@ -41,3 +43,35 @@ end
 OFXClient::all_institutions
 ```
 => {"121 Financial Credit Union"=>666, "1st Advantage FCU"=>542, ... , "Zions Bank"=>630, "zWachovia"=>452}
+
+### Get a credit card statement
+
+```Ruby
+# Retrieve a FinancialInstitution
+fi = OFXClient::get_institution(449)
+# Create an Account by with your account number and an AccountType (CHECKING, SAVINGS, MONEYMRKT, CREDITCARD)
+account = Account.new("5424181084150023", AccountType::CREDITCARD)
+# fetch the OFX statement(s) in date range (yyyymmdd) from the institution
+# currently, this call returns the raw OFX body response
+puts OFXClient::get_statement(fi, account, "myOnlineUsername", "myPassword", "20151201", "20160115")
+```
+Response:
+```
+OFXHEADER:100
+DATA:OFXSGML
+VERSION:102
+SECURITY:NONE
+ENCODING:USASCII
+CHARSET:1252
+COMPRESSION:NONE
+OLDFILEUID:NONE
+NEWFILEUID:NONE
+
+<OFX>
+<SIGNONMSGSRSV1>
+<SONRS>
+<STATUS>
+<CODE>0
+<SEVERITY>INFO
+</STATUS>...
+```
