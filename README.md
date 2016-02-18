@@ -50,7 +50,7 @@ OFXClient::all_institutions
 # Retrieve a FinancialInstitution
 fi = OFXClient::get_institution(449)
 # Create an Account by with your account number and an AccountType (CHECKING, SAVINGS, MONEYMRKT, CREDITCARD)
-account = Account.new("5424181084150023", AccountType::CREDITCARD)
+account = Account.new("1234567890123456", AccountType::CREDITCARD)
 # fetch the OFX statement(s) in date range (yyyymmdd) from the institution
 # currently, this call returns the raw OFX body response
 puts OFXClient::get_statement(fi, account, "myOnlineUsername", "myPassword", "20151201", "20160115")
@@ -74,4 +74,16 @@ NEWFILEUID:NONE
 <CODE>0
 <SEVERITY>INFO
 </STATUS>...
+```
+### Get a checking statement
+```Ruby
+# Retrieve a FinancialInstitution
+fi = OFXClient::get_institution(449)
+# Create an Account by with your account number and an AccountType (CHECKING, SAVINGS, MONEYMRKT, CREDITCARD)
+account = Account.new("1234567890123456", AccountType::CREDITCARD)
+# CHECKING/SAVINGS accounts require a routing number
+account.routingNumber = "0010020032"
+# fetch the OFX statement(s) in date range (yyyymmdd) from the institution
+# currently, this call returns the raw OFX body response
+puts OFXClient::get_statement(fi, account, "myOnlineUsername", "myPassword", "20151201", "20160115")
 ```
