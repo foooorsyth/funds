@@ -37,7 +37,7 @@ end
 => fidelity.com  
 => https://ofx.fidelity.com/ftgw/OFX/clients/download
 
-### Retrieve all FIDs
+### Retrieve all institution IDs
 
 ```Ruby
 OFXClient::all_institutions
